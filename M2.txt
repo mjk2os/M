@@ -1,0 +1,354 @@
+Practical 1
+1.	Create an Employee Table with the help of Data Mining Tool WEKA.
+●	You can create a dataset with some attributes like Age, Salary, Experience, Education, and Department.
+
+@relation Employee
+
+@attribute EmpID numeric @attribute Name string @attribute Age numeric @attribute Salary numeric @attribute Experience numeric
+@attribute Education {HighSchool,Bachelor,Master,PhD} @attribute Department {HR,Sales,IT,Finance}
+
+@data 1,John,25,30000,1,Bachelor,Sales 2,Sarah,30,45000,3,Master,IT 3,Raj,28,35000,2,Bachelor,Sales 4,Anita,40,60000,10,Master,Finance 5,David,35,52000,7,Master,IT 6,Linda,45,75000,12,PhD,Finance 7,Arjun,29,40000,4,Bachelor,HR 8,Maria,32,48000,6,Master,HR 9,Karan,26,32000,2,HighSchool,Sales 10,Sneha,31,50000,5,Master,IT
+
+
+●	Save the file as employee.arff.
+●	Open WEKA → Explorer.
+
+ 
+●	Go to the Preprocess tab.
+●	Click Open file → select employee.arff
+
+
+The dataset will load, and you’ll see attributes like Age, Salary, etc. on the left panel.
+
+ 
+Practical 2
+2.	Apply pre-processing to the training data-set
+
+Dataset saved as StudentPerformance.arff
+@relation StudentPerformance
+
+@attribute ID numeric @attribute Name string @attribute Age numeric
+@attribute Gender {Male,Female} @attribute Attendance numeric @attribute StudyHours numeric @attribute Grade {A,B,C,D,Fail}
+
+@data 1,John,18,Male,85,10,A
+2,Sarah,19,Female,90,12,A 3,Raj,18,Male,70,8,B
+4,Anita,20,Female,65,6,C 5,David,21,Male,55,4,D 6,Linda,19,Female,95,15,A 7,Arjun,22,Male,40,3,Fail 8,Maria,18,Female,75,7,B 9,Karan,20,Male,60,5,C 10,Sneha,21,Female,50,2,Fail
+
+Open WEKA → Explorer. Go to the Preprocess tab.
+Click Open file → select your dataset
+ 
+ 
+
+
+●	You can include/exclude attributes:
+ 
+○	Select an attribute → click Remove (e.g., remove ID or Name if they are not useful).
+
+Choose a filter
+
+●	In the Preprocess tab, click Choose under Filter.
+●	ReplaceMissingValues → Handles missing values automatically.
+
+○	unsupervised → attribute → ReplaceMissingValues
+ 
+ 
+
+
+●	Normalize → Scales numeric attributes to [0,1].
+
+○	unsupervised → attribute → Normalize
+ 
+ 
+
+
+●	Standardize → Converts numeric attributes to mean = 0, std. dev. = 1.
+
+○	unsupervised → attribute → Standardize
+ 
+ 
+ 
+Practical 3
+3.	Show implementation of classification rule using J48 algorithm Save the dataset as employee_classification.arff. 
+@relation Employee_Classification
+
+@attribute Age numeric @attribute Salary numeric @attribute Experience numeric
+@attribute Education {HighSchool,Bachelor,Master,PhD} @attribute Department {HR,Sales,IT,Finance}
+
+@data 25,30000,1,Bachelor,Sales 30,45000,3,Master,IT
+28,35000,2,Bachelor,Sales 40,60000,10,Master,Finance 35,52000,7,Master,IT
+45,75000,12,PhD,Finance 29,40000,4,Bachelor,HR 32,48000,6,Master,HR
+26,32000,2,HighSchool,Sales 31,50000,5,Master,IT
+27,33000,2,Bachelor,Sales 38,58000,8,Master,Finance 34,51000,6,Bachelor,IT 41,70000,11,PhD,Finance 36,55000,7,Master,IT
+29,37000,3,Bachelor,Sales 33,49000,5,Master,HR
+42,72000,12,PhD,Finance 28,36000,2,Bachelor,Sales 39,60000,9,Master,IT
+
+
+
+Open WEKA → Explorer → Preprocess → Open File → load dataset.
+ 
+ 
+
+Set Department as the class attribute (bottom right).
+
+ 
+Go to Classify tab → Choose → trees → J48.
+
+
+Select evaluation method (10-fold cross-validation recommended).
+ 
+ 
+
+Click Start → J48 will generate a decision tree based on Age, Salary, Experience, Education.
+ 
+ 
+ 
+Practical 4
+4.	Show the implementation of Naïve Bayes algorithm.
+Dataset saved as Weather.arff
+@relation Weather
+
+@attribute Outlook {Sunny,Overcast,Rain} @attribute Temperature {Hot,Mild,Cool} @attribute Humidity {High,Normal} @attribute Wind {Weak,Strong} @attribute Play {Yes,No}
+
+@data Sunny,Hot,High,Weak,No Sunny,Hot,High,Strong,No Overcast,Hot,High,Weak,Yes Rain,Mild,High,Weak,Yes Rain,Cool,Normal,Weak,Yes Rain,Cool,Normal,Strong,No
+Overcast,Cool,Normal,Strong,Yes Sunny,Mild,High,Weak,No Sunny,Cool,Normal,Weak,Yes Rain,Mild,Normal,Weak,Yes Sunny,Mild,Normal,Strong,Yes Overcast,Mild,High,Strong,Yes Overcast,Hot,Normal,Weak,Yes Rain,Mild,High,Strong,No
+
+Initially, we have to load the required dataset in the weka tool using choose file option. Here we are selecting the weather dataset to execute
+ 
+ 
+●	Now we have to go to the classify tab on the top left side and click on the choose button and select the Naive Bayesian algorithm in it.
+
+●	Now to change the parameters click on the right side at the choose button, and we are accepting the default values in this example.
+ 
+ 
+We choose the Percentage split as our measurement method from the “Test” choices in the main panel. Since we don't have a separate test data collection, we'll use the percentage split of 66 percent to get a good idea of the model's accuracy
+●	To generate the model, we now click "start." When the model is done, the evaluation statistic will appear in the right panel.
+ 
+ 
+ 
+5.	Show the implementation of Decision Tree. Save Dataset as EmployeeClassification.arff 
+@relation EmployeeClassification
+
+@attribute Age numeric @attribute Salary numeric @attribute Experience numeric
+@attribute Education {HighSchool,Bachelor,Master,PhD} @attribute Department {HR,Sales,IT,Finance}
+
+@data 25,30000,1,Bachelor,Sales 30,45000,3,Master,IT
+28,35000,2,Bachelor,Sales 40,60000,10,Master,Finance 35,52000,7,Master,IT
+45,75000,12,PhD,Finance 50,80000,15,PhD,Finance 29,40000,4,Bachelor,HR 32,48000,6,Master,HR
+26,32000,2,HighSchool,Sales 31,50000,5,Master,IT
+27,36000,2,Bachelor,Sales 38,58000,8,Master,Finance 41,70000,11,PhD,Finance 33,49000,6,Bachelor,HR 29,42000,4,Bachelor,IT 36,55000,9,Master,Finance 39,62000,10,PhD,Finance 28,37000,3,Bachelor,Sales 34,51000,7,Master,IT
+
+
+Open the Weka program Click the Explorer button.
+Click the Open File button and select the data file called employeeClassification.arff.
+ 
+ 
+
+Click the Classify button in the top row of buttons.
+
+In the Classifier pane, click the Choose button and select the J48 option under the Trees menu heading.
+ 
+ 
+
+click the Start button and watch the Classifier output window
+ 
+ 
+ 
+ 
+ 
+Practical 6
+
+6.	Show the implementation of Time Series Algorithm.
+
+if you are using 3.7.11 or newer, you could install the time series package from the package manager (see attached pictures).
+
+
+
+Save Dataset as forecast.arff
+
+@relation forecast_data
+
+@attribute Date date "yyyy-MM-dd"
+ 
+@attribute Sales numeric @attribute Expenses numeric
+
+@data
+2023-01-01, 1200, 800
+2023-01-02, 1350, 950
+2023-01-03, 1280, 870
+2023-01-04, 1400, 920
+2023-01-05, 1500, 1000
+2023-01-06, 1600, 1100
+2023-01-07, 1700, 1200
+2023-01-08, 1650, 1180
+2023-01-09, 1750, 1250
+2023-01-10, 1800, 1300
+
+●	Click Open file and select your dataset.
+
+
+●	Select the target attribute to forecast
+●	Specify the time stamp attribute
+●	Choose the number of steps ahead you want to forecast (e.g., 7 days).
+●	Select the forecasting algorithm, for example:
+○	LinearRegression
+ 
+ 
+
+●	Click Start.
+●	WEKA will build the forecasting model and generate predictions.
+
+ 
+Practical 7
+
+7.	Show the implementation of Clustering Algorithm.
+Save the dataset as Customers.arff
+@relation Customers
+
+@attribute Age numeric
+@attribute Annual_Income numeric @attribute Spending_Score numeric
+
+@data 25,35000,39
+34,40000,81
+29,45000,6
+45,80000,77
+31,60000,40
+40,70000,76
+23,30000,94
+35,65000,34
+52,90000,60
+48,75000,88
+33,50000,17
+42,72000,55
+36,64000,42
+27,32000,85
+50,91000,53
+41,69000,73
+28,36000,91
+47,77000,62
+39,71000,80
+30,42000,19
+
+
+●	Open WEKA Explorer.
+●	Click Open file and select your dataset (e.g., a CSV or ARFF file without class labels, since clustering is unsupervised).
+ 
+ 
+
+●	Click the Cluster tab in WEKA Explorer.
+Click Choose under the Clusterer box. Select -> SimpleKMeans
+
+
+●	Click Start.
+●	WEKA will cluster the data into k clusters.
+ 
+ 
+
+ 
+Practical 8
+8.	Show the implementation of k-nearest neighbor Save the dataset as iris.arff
+@relation iris
+
+@attribute sepallength numeric @attribute sepalwidth numeric @attribute petallength numeric @attribute petalwidth numeric
+@attribute class {Iris-setosa,Iris-versicolor,Iris-virginica}
+
+@data
+5.1,3.5,1.4,0.2,Iris-setosa
+4.9,3.0,1.4,0.2,Iris-setosa
+4.7,3.2,1.3,0.2,Iris-setosa
+4.6,3.1,1.5,0.2,Iris-setosa
+5.0,3.6,1.4,0.2,Iris-setosa
+5.4,3.9,1.7,0.4,Iris-setosa
+4.6,3.4,1.4,0.3,Iris-setosa
+5.0,3.4,1.5,0.2,Iris-setosa
+5.1	,3.8,1.5,0.3,Iris-setosa
+4.8,3.0,1.4,0.1,Iris-setosa 7.0,3.2,4.7,1.4,Iris-versicolor 6.4,3.2,4.5,1.5,Iris-versicolor 6.9,3.1,4.9,1.5,Iris-versicolor 5.5,2.3,4.0,1.3,Iris-versicolor 6.5,2.8,4.6,1.5,Iris-versicolor 5.7,2.8,4.5,1.3,Iris-versicolor 6.3,3.3,4.7,1.6,Iris-versicolor 4.9,2.4,3.3,1.0,Iris-versicolor 6.6,2.9,4.6,1.3,Iris-versicolor 5.2,2.7,3.9,1.4,Iris-versicolor 6.3,3.3,6.0,2.5,Iris-virginica 5.8,2.7,5.1,1.9,Iris-virginica 7.1,3.0,5.9,2.1,Iris-virginica 6.3,2.9,5.6,1.8,Iris-virginica 6.5,3.0,5.8,2.2,Iris-virginica 7.6,3.0,6.6,2.1,Iris-virginica 4.9,2.5,4.5,1.7,Iris-virginica 7.3,2.9,6.3,1.8,Iris-virginica 6.7,2.5,5.8,1.8,Iris-virginica 7.2,3.6,6.1,2.5,Iris-virginica
+ 
+●	Open WEKA Explorer.
+●	Click Open file and select your labeled dataset
+
+
+●	Click the Classify tab.
+●	Click Choose under the Classifier box.
+●	From the list, choose:
+lazy → IBk
+ 
+ 
+
+●	Click Start.
+●	WEKA will run the k-NN classifier and output results.
+ 
+ 
+  
+Practical 9
+
+9.	Show the implementation of Apriori Algorithm Save the Dataset as marketbasket.arff
+@relation marketbasket
+
+@attribute Bread {t,f} @attribute Milk {t,f} @attribute Butter {t,f} @attribute Beer {t,f}
+
+@data t,t,f,t
+t,f,t,f
+f,t,t,t
+t,t,t,f
+
+
+●	Apriori works on transactional data (e.g., market basket data).
+●	Open WEKA Explorer.
+●	Click Open file and select your transactional dataset file.
+
+ 
+●	Click the Associate tab (used for association rule mining).
+●	Click Choose.
+●	Select Apriori from the list.
+
+
+●	Click Start.
+●	WEKA will find frequent itemsets and generate association rules
+ 
+ 
+ 
+ 
+ 
+Practical 10 10.Show the implementation of Association Algorithm.
+Save the Dataset as Shopping_Basket.arff
+@relation Shopping_Basket @attribute Milk {0,1}
+@attribute Bread {0,1}
+@attribute Butter {0,1}
+@attribute Eggs {0,1}
+@attribute Cheese {0,1}
+@attribute Jam {0,1}
+
+@data 1,1,1,0,0,1
+1,1,0,1,0,0
+0,1,1,1,1,0
+1,0,1,0,1,1
+1,1,1,1,0,0
+0,1,0,1,1,0
+1,1,0,0,1,0
+1,0,1,1,0,1
+0,1,1,0,1,1
+1,1,0,1,1,0
+1,0,1,1,1,1
+0,1,1,0,0,1
+1,1,1,0,1,0
+1,0,0,1,1,1
+0,1,1,1,0,1
+
+
+●	Open WEKA Explorer.
+●	Click Open file and select your dataset.
+ 
+ 
+
+●	Associate tab is designed for association rule mining.
+●	Click Choose.
+●	FPGrowth — faster algorithm based on frequent pattern trees.
+
+
+●	Click Start.
+●	WEKA mines association rules and outputs them.
+ 
+ 
+
+ 
+
