@@ -1,0 +1,190 @@
+Practical No. 1
+
+ Aim: Plotting PDF and CDF for Uniform and Exponential Distributions
+Objective: To understand and visualize the Probability Density Function (PDF) and Cumulative Distribution Function (CDF) for given parameters of Uniform and Exponential distributions.
+	Uniform Distribution
+Step 1: Generate random values
+Open Excel →In Column A, type heading: Random Values. →In A2, enter formula:  =RAND() (This generates a random number between 0 and 1.) → Drag the formula down up to A21 (20random values).
+Step 2: Sort values Copy the generated random numbers.
+              Copy the generated random numbers. →Paste them as values (Right-click → Paste Values). → Sort ascending (Data → Sort Smallest to Largest).
+Step 3: Calculate PDF for Uniform (0,1)
+For Uniform (0,1):
+f(x)=1 for 0≤x≤1
+In Column B, write heading: Uniform_PDF. →In B2, type: =IF(AND(A2>=0, A2<=1), 1, 0)
+→Drag down to B21.
+Step 4: Calculate CDF for Uniform(0,1)
+For Uniform(0,1):
+F(x)=x for 0≤x≤1
+In Column C, write heading: CDF. →In C2, type: =A2 →Drag down to C21.
+step 5: Plot graphs
+Select Column A & B → Insert → Scatter chart → This gives the PDF plot.
+Select Column A & C → Insert → Scatter chart → This gives the CDF plot.
+
+	Exponential Distribution
+Step 1: Generate random x-values
+         In Column E, heading: x values. →  Type: =-LN(1-RAND()) →  Drag till E20 
+Step 2: PDF for Exponential(λ = 1)
+Formula:
+f(x)=λe^(-λx)
+For λ = 1:
+f(x)=e^(-x)
+In Column F, heading: Exponential PDF. In F2, type: =EXP(-E2) →Drag down to F101.
+Step 3: CDF for (λ = 1)
+Formula:
+F(x)=1-e^(-λx)
+For λ = 1:
+ExponentialF(x)=1-e^(-x)
+In Column G, heading: Exponential CDF. →In G2, type:=1-EXP(-E2) →Drag down to G101.
+Step 4: Plot graphs
+Select Column E & F → Insert → Scatter chart → Plot Exponential PDF.
+Select Column E & G → Insert → Scatter chart → Plot Exponential CDF.
+
+Practical No. 2
+
+Computing Mean, Variance, and Median (Uniform and Exponential)
+Objective : To compute and compare theoretical and simulated (Excel-generated) Mean, Variance, and Median 
+	Uniform Distribution
+Step 1: Generate random data
+In Excel, in Column A, type heading → Uniform Random Values. →In A2, enter: =RAND()(This generates numbers between 0 and 1) →Drag the formula down till A21  → Copy → Right-click → Paste Special → Values.
+Step 2: Compute simulated statistics
+Mean:	  =AVERAGE(A2:A101)
+
+Variance:   	  =VAR.P(A2:A101)
+
+Median	:  =MEDIAN(A2:A101)
+Step 3: Compute theoretical statistics for Uniform(0,1)
+Here a=0 & b=1
+Mean:	 =(a + b) / 2	 
+
+Variance	:=(b − a)² / 12
+
+
+Median	: =(a + b) / 2
+		Exponential Distribution
+Step 1: Generate exponential random values
+Formula to generate exponential random variable:
+X=-1/λ ln⁡(1-U)
+where U=RAND()and λ=1
+In Column C, heading → Exponential Values. → In C2, enter:=-LN(1-RAND()) →Drag till C101.
+Copy → Paste Special → Values to freeze them.
+Step 2: Compute simulated statistics
+Mean	=AVERAGE(C2:C101)	
+
+Variance	=VAR.P(C2:C101)	
+
+Median :=MEDIAN(C2:C101)
+
+Step 3: Compute theoretical 
+
+Mean: =  1/λ	
+	
+Variance:= 1/λ²
+Median:=  1/λ²
+	
+
+Practical No. 3
+Aim: Plotting and Interpreting Normal Distribution
+R:
+# Step 1: parameters
+mean_value <- 0
+sd_value <- 1
+
+# Step 2: plot the normal curve
+curve(dnorm(x, mean = mean_value, sd = sd_value),
+      from = mean_value - 4*sd_value,
+      to = mean_value + 4*sd_value,
+      main = "Normal Distribution Curve",
+      xlab = "x",
+      ylab = "Density")
+
+# Step 3: add vertical line at mean
+abline(v = mean_value, col = "red", lwd = 2)
+
+# Step 4: Example probabilities
+pnorm(1, mean_value, sd_value)      # P(X ≤ 1)
+1 - pnorm(1, mean_value, sd_value)  # P(X ≥ 1)
+pnorm(1) - pnorm(-1)                # P(-1 < X < 1)
+
+# Step 5: Z-distribution
+curve(dnorm(x),
+      from = -4, to = 4,
+      main = "Standard Normal Curve (Z)",
+      xlab = "Z-score",
+      ylab = "Density")
+abline(v = 0, col = "blue", lwd = 2)
+ Excel: 
+Step 1: Create the X-values
+1.	In Column A, type:
+o	Cell A1 → X
+o	In A2 → enter a starting value (e.g., -4)
+o	Fill down to A82 using increments of 0.1
+Example:
+A2 = -4
+A3 = =A2+0.1
+Then drag down 
+Step 2: Calculate Normal Probability (Y-values)
+Assume mean = 0 and SD = 1 (standard normal).
+In B1, type Normal PDF.
+In B2, enter:
+=NORM.DIST(A2, 0, 1, FALSE)
+Drag down 
+Step 3: Create the Bell Curve
+1.	Select columns A and B.
+2.	Go to Insert → Scatter → Scatter with Smooth Lines.
+3.	You will see the normal bell curve.
+
+
+Practical No. 4
+
+Aim: Solving a real-life problem using the Normal distribution
+A class has exam marks that are approximately normally distributed with mean= 70 and standard deviation=8 .
+1.	What is the probability that a randomly chosen student scores more than 85?
+2.	What is the minimum score required to be in the top 10% of the class?
+
+Excel (cell formulas)
+•	Z-score for 85: =STANDARDIZE(85,70,8)
+•	Probability : =1 - NORM.DIST(85, 70, 8, TRUE) .
+•	90th percentile (top 10% cutoff): =NORM.INV(0.90, 70, 8) 
+R
+mu <- 70        # mean
+sigma <- 8      # standard deviation
+
+# 1. Probability that a student scores more than 85
+x <- 85
+
+# Convert to Z-score
+z <- (x - mu) / sigma
+z
+
+prob_more_than_85 <- pnorm(x, mean = mu, sd = sigma, lower.tail = FALSE)
+prob_more_than_85
+
+# 2. Find the minimum score required for top 10%
+# i.e. 90th percentile
+
+cutoff_top_10 <- qnorm(0.90, mean = mu, sd = sigma)
+
+Practical No. 9
+
+Aim : To construct a confidence interval for a single population mean using Excel and R.
+
+Sample mean x ˉ=50
+Sample standard deviation s=8
+Sample size n=64
+Confidence level = 95%
+Excel :
+Standard Error: =SD/SQRT(n)
+Lower Limit: =Mean - 1.96*(SD/SQRT(n))
+Upper Limit: =Mean + 1.96*(SD/SQRT(n))
+
+Practical No. 10
+
+Aim : To construct a confidence interval for the difference between two population means using Excel and R.
+x ̅1 =  60,     n1 =50
+x ̅2 =  55,      n2 =50
+σ1= 10
+σ2 = 8
+
+Excel:
+Lower Limit: =(x ̅1 -x ̅2) - 1.96*SQRT((σ12/n1)+( (σ22/n2))
+Upper Limit: =(x ̅1 +x ̅2) + 1.96*SQRT((σ12/n1)+( (σ22/n2))
